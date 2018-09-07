@@ -1,0 +1,26 @@
+XGBoost Regression Model:
+
+-Speed & performance (compared with other ensemble regression models).
+-Parallelisable and scalable to larger datasets (useful if conducting analysis on GPUs or on Hadoop).
+-Good range of parameters for cross validation, regularisation, objective functions and missing values. 
+
+
+Preprocessing:
+
+-Removed all rows with missing values.
+-Extracted 'Type2' column by encoding the 'Type' column as a number, as the algorithm is not compatible with string data types.
+-Removed all the outliers in 'Page total likes' column, by filtering out all the rows with 'Page total likes' in the 90th percentile.
+-Selected the best combination of features by using a feature selection algorithm. All 7 features created the best performing model. However, by excluding the 'Post hour' column and creating the model with the remaining 6 features, the performance was not far off. The 6 features could be considered for speeding up the training process.
+-Scaled all the features, so all the values in each column were between 0 & 1, have a SD =  1 and a mean = 0.
+-Data was loaded into a DMatrix data structure for memory efficiency and training speed.
+-Split data into train and test sets, for evaluation of the model.
+-Grid search was used to tune the model and find the best combination of parameters to improve the model performance.
+
+
+Evaluation:
+-10-fold cross validation used
+-Train Mean Absolute Error (MAE) = 369.02 (+/- 48.69)
+-Test Mean Absolute Error (MAE) = 392.47
+-XGBoost model generalises well
+
+
